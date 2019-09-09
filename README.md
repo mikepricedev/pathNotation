@@ -3,7 +3,7 @@ A dot-notation based path string which yields key literals, allows
 for the inclusion of "." character in keys, and provides other useful
 utilities for reasoning and working with document paths.
 
-## [Docs](docs/index.html, "PathNotation Documentation")
+## [Docs](docs/README.md "PathNotation Documentation")
 
 ## Example:
 ```
