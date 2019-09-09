@@ -1,16 +1,13 @@
 const KEYS:unique symbol = Symbol();
 
-/**
-  @description Dot-notation based path string which yields key literals, allows for the inclusion of keys with "." characters, and provides node meta data and other useful utilities.
-  @extends String
+/** 
+ * A dot-notation based path string which yields key literals, allows
+ * for the inclusion of "." character in keys, and provides other useful
+ * utilities for reasoning and working with document paths.
 */
 export default class PathNotation extends String {
   private readonly [KEYS]:string[];
-  /**
-    @description Creates a PathNotation instance.
-    @arg {string | number | PathNotation | Iterable<string | number | PathNotation>} path - 
-      path or an iterable of keys or other PathNotation instances.
-  */
+
   constructor(path:string | number | PathNotation | Iterable<string | number | PathNotation>) {
 
     const keys:string[] = [];
@@ -63,8 +60,7 @@ export default class PathNotation extends String {
 
   //Accessors
   /**
-    @description Number of key literals in path.
-    @type {number}
+   * Number of key literals in path.
   */
   get numKeys():number {
 
@@ -73,8 +69,7 @@ export default class PathNotation extends String {
   }
 
   /**
-    @description First key literal in path.
-    @type {string}
+   * Root key of path.
   */
   get firstKey():string {
 
@@ -83,8 +78,7 @@ export default class PathNotation extends String {
   }
 
   /**
-    @description Last key literal in path.
-    @type {string}
+   * Terminal key of path.
   */
   get lastKey():string {
 
@@ -100,9 +94,7 @@ export default class PathNotation extends String {
 
   //Methods
   /**
-    @description Yields key literals from path.
-    @generator
-    @yields {string} The next key literal in path.
+   * Yields key literals from path.
   */
   *keys():IterableIterator<string> {
 
@@ -111,9 +103,8 @@ export default class PathNotation extends String {
   }
   
   /**
-    @description Returns sub path.
-    @arg {number} fromKeyIndex - The zero-based index at which to begin extraction.
-    @arg {number} [endKeyIndex] - Optional. The zero-based index before which to end extraction.
+   * Extracts a section of a path and returns it as a new [[PathNotation]],
+   * without modifying the original path.
   */
   slicePath(beginKeyIndex:number, endKeyIndex?:number): PathNotation {
 
@@ -128,9 +119,7 @@ export default class PathNotation extends String {
   }
 
   /**
-    @description Yields key literals dot-notated path.
-    @generator
-    @yields {string} The next key literal in path.
+   * Yields key literals from dot-notated path.
   */
   static *pathNotationToKeys(path:string):IterableIterator<string> {
     
@@ -175,14 +164,11 @@ export default class PathNotation extends String {
   }
 
   /**
-    @description Returns dot-notated path.
-    @returns {string} Dot-notated path.
+    Returns dot-notated path string.
   */
   static keysToPathNotation(keys:Iterable<string>):string {
 
-    
-
-    const keysIter = <Iterator<string, string>>keys[Symbol.iterator]();
+    const keysIter = keys[Symbol.iterator]();
     
     // Handle first key
     let keysIterResult = keysIter.next();
@@ -192,7 +178,7 @@ export default class PathNotation extends String {
       return '';
     }
 
-    let pathNotation = keysIterResult.value.split('.').join('\\.');
+    let pathNotation = <string>keysIterResult.value.split('.').join('\\.');
     
     // Handle remaining keys
     keysIterResult = keysIter.next();

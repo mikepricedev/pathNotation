@@ -22,5 +22,16 @@
     "outDir": "build",
     "pretty": true,
     "target": "ES2016"
+  },
+  "typedocOptions": {
+    "mode": "file",
+    "out": "docs",
+    "excludeExternals":true,
+    "excludeNotExported":true,
+    "excludePrivate":true,
+    "excludeProtected":true,
+    "entryPoint":"PathNotation",
+    "hideGenerator":true,
+    "theme":"minimal",
   }
 }
