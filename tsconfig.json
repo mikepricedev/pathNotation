@@ -33,6 +33,7 @@
     "mode": "file",
     "out": "docs",
     "readme":"none",
-    "theme":"markdown"
+    "theme":"markdown",
+    "hideSources":true
   }
 }

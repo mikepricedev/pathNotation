@@ -99,8 +99,6 @@ utilities for reasoning and working with document paths.
 
 \+ **new PathNotation**(`path`: string | number | [PathNotation](README.md) | Iterable‹string | number | [PathNotation](README.md)›): *[PathNotation](README.md)*
 
-*Defined in [PathNotation.ts:9](https://github.com/raptor9g/pathNotation/blob/38b5148/src/PathNotation.ts#L9)*
-
 **Parameters:**
 
 Name | Type |
@@ -117,8 +115,6 @@ Name | Type |
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:501
-
 Returns the length of a String object.
 
 ___
@@ -126,8 +122,6 @@ ___
 ### `Static` String
 
 ▪ **String**: *StringConstructor*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:527
 
 Allows manipulation and formatting of text strings and determination and location of substrings within strings.
 
@@ -137,8 +131,6 @@ Allows manipulation and formatting of text strings and determination and locatio
 
 • **get __@toStringTag**(): *string*
 
-*Defined in [PathNotation.ts:89](https://github.com/raptor9g/pathNotation/blob/38b5148/src/PathNotation.ts#L89)*
-
 **Returns:** *string*
 
 ___
@@ -146,8 +138,6 @@ ___
 ###  firstKey
 
 • **get firstKey**(): *string*
-
-*Defined in [PathNotation.ts:74](https://github.com/raptor9g/pathNotation/blob/38b5148/src/PathNotation.ts#L74)*
 
 Root key of path.
 
@@ -159,8 +149,6 @@ ___
 
 • **get lastKey**(): *string*
 
-*Defined in [PathNotation.ts:83](https://github.com/raptor9g/pathNotation/blob/38b5148/src/PathNotation.ts#L83)*
-
 Terminal key of path.
 
 **Returns:** *string*
@@ -170,8 +158,6 @@ ___
 ###  numKeys
 
 • **get numKeys**(): *number*
-
-*Defined in [PathNotation.ts:65](https://github.com/raptor9g/pathNotation/blob/38b5148/src/PathNotation.ts#L65)*
 
 Number of key literals in path.
 
@@ -185,8 +171,6 @@ Number of key literals in path.
 
 *Overrides void*
 
-*Defined in [PathNotation.ts:115](https://github.com/raptor9g/pathNotation/blob/38b5148/src/PathNotation.ts#L115)*
-
 **Returns:** *IterableIterator‹string›*
 
 ___
@@ -196,8 +180,6 @@ ___
 ▸ **anchor**(`name`: string): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:460
 
 Returns an <a> HTML anchor element and sets the name attribute to the text value
 
@@ -217,8 +199,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:463
-
 Returns a <big> HTML element
 
 **Returns:** *string*
@@ -230,8 +210,6 @@ ___
 ▸ **blink**(): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:466
 
 Returns a <blink> HTML element
 
@@ -245,8 +223,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:469
-
 Returns a <b> HTML element
 
 **Returns:** *string*
@@ -258,8 +234,6 @@ ___
 ▸ **charAt**(`pos`: number): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:402
 
 Returns the character at the specified index.
 
@@ -279,8 +253,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:408
-
 Returns the Unicode value of the character at the specified location.
 
 **Parameters:**
@@ -298,8 +270,6 @@ ___
 ▸ **codePointAt**(`pos`: number): *number | undefined*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:408
 
 Returns a nonnegative integer Number less than 1114112 (0x110000) that is the code point
 value of the UTF-16 encoded code point starting at the string element at position pos in
@@ -323,8 +293,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:414
-
 Returns a string that contains the concatenation of two or more strings.
 
 **Parameters:**
@@ -342,8 +310,6 @@ ___
 ▸ **endsWith**(`searchString`: string, `endPosition?`: number): *boolean*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:424
 
 Returns true if the sequence of elements of searchString converted to a String is the
 same as the corresponding elements of this object (converted to a String) starting at
@@ -366,8 +332,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:472
-
 Returns a <tt> HTML element
 
 **Returns:** *string*
@@ -379,8 +343,6 @@ ___
 ▸ **fontcolor**(`color`: string): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:475
 
 Returns a <font> HTML element and sets the color attribute value
 
@@ -400,8 +362,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:478
-
 Returns a <font> HTML element and sets the size attribute value
 
 **Parameters:**
@@ -415,8 +375,6 @@ Name | Type |
 ▸ **fontsize**(`size`: string): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:481
 
 Returns a <font> HTML element and sets the size attribute value
 
@@ -435,8 +393,6 @@ ___
 ▸ **includes**(`searchString`: string, `position?`: number): *boolean*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:417
 
 Returns true if searchString appears as a substring of the result of converting this
 object to a String, at one or more positions that are
@@ -459,8 +415,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:421
-
 Returns the position of the first occurrence of a substring.
 
 **Parameters:**
@@ -480,8 +434,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:484
-
 Returns an <i> HTML element
 
 **Returns:** *string*
@@ -491,8 +443,6 @@ ___
 ###  keys
 
 ▸ **keys**(): *IterableIterator‹string›*
-
-*Defined in [PathNotation.ts:99](https://github.com/raptor9g/pathNotation/blob/38b5148/src/PathNotation.ts#L99)*
 
 Yields key literals from path.
 
@@ -505,8 +455,6 @@ ___
 ▸ **lastIndexOf**(`searchString`: string, `position?`: number): *number*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:428
 
 Returns the last occurrence of a substring in the string.
 
@@ -526,8 +474,6 @@ ___
 ▸ **link**(`url`: string): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:487
 
 Returns an <a> HTML element and sets the href attribute value
 
@@ -549,8 +495,6 @@ ___
 
 *Overrides void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:434
-
 Determines whether two strings are equivalent in the current locale.
 
 **Parameters:**
@@ -571,8 +515,6 @@ ___
 
 *Overrides void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:440
-
 Matches a string with a regular expression, and returns an array containing the results of that search.
 
 **Parameters:**
@@ -591,8 +533,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:432
-
 Returns the String value result of normalizing the string into the normalization form
 named by form as specified in Unicode Standard Annex #15, Unicode Normalization Forms.
 
@@ -607,8 +547,6 @@ Name | Type | Description |
 ▸ **normalize**(`form?`: string): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:440
 
 Returns the String value result of normalizing the string into the normalization form
 named by form as specified in Unicode Standard Annex #15, Unicode Normalization Forms.
@@ -628,8 +566,6 @@ ___
 ▸ **padEnd**(`maxLength`: number, `fillString?`: string): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2017.string.d.ts:46
 
 Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length.
 The padding is applied from the end (right) of the current string.
@@ -651,8 +587,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2017.string.d.ts:33
-
 Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length.
 The padding is applied from the start (left) of the current string.
 
@@ -672,8 +606,6 @@ ___
 ▸ **repeat**(`count`: number): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:447
 
 Returns a String value that is made from count copies appended together. If count is 0,
 the empty string is returned.
@@ -696,8 +628,6 @@ ___
 
 *Overrides void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:447
-
 Replaces text in a string, using a regular expression or search string.
 
 **Parameters:**
@@ -714,8 +644,6 @@ Name | Type | Description |
 *Inherited from void*
 
 *Overrides void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:454
 
 Replaces text in a string, using a regular expression or search string.
 
@@ -750,8 +678,6 @@ ___
 
 *Overrides void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:460
-
 Finds the first substring match in a regular expression search.
 
 **Parameters:**
@@ -770,8 +696,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:468
-
 Returns a section of a string.
 
 **Parameters:**
@@ -788,8 +712,6 @@ ___
 ###  slicePath
 
 ▸ **slicePath**(`beginKeyIndex`: number, `endKeyIndex?`: number): *[PathNotation](README.md)*
-
-*Defined in [PathNotation.ts:109](https://github.com/raptor9g/pathNotation/blob/38b5148/src/PathNotation.ts#L109)*
 
 Extracts a section of a path and returns it as a new [PathNotation](README.md),
 without modifying the original path.
@@ -811,8 +733,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:490
-
 Returns a <small> HTML element
 
 **Returns:** *string*
@@ -826,8 +746,6 @@ ___
 *Inherited from void*
 
 *Overrides void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:475
 
 Split a string into substrings using the specified separator and return them as an array.
 
@@ -847,8 +765,6 @@ ___
 ▸ **startsWith**(`searchString`: string, `position?`: number): *boolean*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:454
 
 Returns true if the sequence of elements of searchString converted to a String is the
 same as the corresponding elements of this object (converted to a String) starting at
@@ -871,8 +787,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:493
-
 Returns a <strike> HTML element
 
 **Returns:** *string*
@@ -885,8 +799,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:496
-
 Returns a <sub> HTML element
 
 **Returns:** *string*
@@ -898,8 +810,6 @@ ___
 ▸ **substr**(`from`: number, `length?`: number): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:509
 
 Gets a substring beginning at the specified location and having the specified length.
 
@@ -920,8 +830,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:483
-
 Returns the substring at the specified location within a String object.
 
 **Parameters:**
@@ -941,8 +849,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:499
-
 Returns a <sup> HTML element
 
 **Returns:** *string*
@@ -954,8 +860,6 @@ ___
 ▸ **toLocaleLowerCase**(): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:489
 
 Converts all alphabetic characters to lowercase, taking into account the host environment's current locale.
 
@@ -969,8 +873,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:495
-
 Returns a string where all alphabetic characters have been converted to uppercase, taking into account the host environment's current locale.
 
 **Returns:** *string*
@@ -982,8 +884,6 @@ ___
 ▸ **toLowerCase**(): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:486
 
 Converts all the alphabetic characters in a string to lowercase.
 
@@ -997,8 +897,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:396
-
 Returns a string representation of a string.
 
 **Returns:** *string*
@@ -1010,8 +908,6 @@ ___
 ▸ **toUpperCase**(): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:492
 
 Converts all the alphabetic characters in a string to uppercase.
 
@@ -1025,8 +921,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:498
-
 Removes the leading and trailing white space and line terminator characters from a string.
 
 **Returns:** *string*
@@ -1038,8 +932,6 @@ ___
 ▸ **trimEnd**(): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2019.string.d.ts:23
 
 Removes the trailing white space and line terminator characters from a string.
 
@@ -1055,8 +947,6 @@ ___
 
 *Overrides void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2019.string.d.ts:29
-
 Removes the trailing white space and line terminator characters from a string.
 
 **Returns:** *string*
@@ -1071,8 +961,6 @@ ___
 
 *Overrides void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2019.string.d.ts:32
-
 Removes the leading white space and line terminator characters from a string.
 
 **Returns:** *string*
@@ -1084,8 +972,6 @@ ___
 ▸ **trimStart**(): *string*
 
 *Inherited from void*
-
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es2019.string.d.ts:26
 
 Removes the leading white space and line terminator characters from a string.
 
@@ -1099,8 +985,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/michaelprice/Development/moduels/pathNotation/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:512
-
 Returns the primitive value of the specified object.
 
 **Returns:** *string*
@@ -1110,8 +994,6 @@ ___
 ### `Static` keysToPathNotation
 
 ▸ **keysToPathNotation**(`keys`: Iterable‹string›): *string*
-
-*Defined in [PathNotation.ts:169](https://github.com/raptor9g/pathNotation/blob/38b5148/src/PathNotation.ts#L169)*
 
 Returns dot-notated path string.
 
@@ -1128,8 +1010,6 @@ ___
 ### `Static` pathNotationToKeys
 
 ▸ **pathNotationToKeys**(`path`: string): *IterableIterator‹string›*
-
-*Defined in [PathNotation.ts:124](https://github.com/raptor9g/pathNotation/blob/38b5148/src/PathNotation.ts#L124)*
 
 Yields key literals from dot-notated path.
 
