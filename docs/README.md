@@ -1,6 +1,5 @@
 **[path-notation](README.md)**
 
-› [PathNotation](README.md)
 
 # Class: PathNotation
 
