@@ -2,8 +2,9 @@ const KEYS:unique symbol = Symbol();
 
 /** 
  * A dot-notation based path string which yields key literals, allows
- * for the inclusion of "." character in keys, and provides other useful
- * utilities for reasoning and working with document paths.
+ * for the inclusion of the "." character in keys and square bracket notation 
+ * in path strings, promotes readability of path strings and provides other 
+ * useful utilities for reasoning and working with document paths.
 */
 export default class PathNotation extends String {
   private readonly [KEYS]:string[];
@@ -125,6 +126,7 @@ export default class PathNotation extends String {
     
     let key = '';
     let escaped = false;
+    let squareBracket = false;
 
     for(const char of path) {
       
@@ -139,13 +141,37 @@ export default class PathNotation extends String {
         key += char;
         escaped = false;
       
+      // Open square bracket, yield and reset key
+      } else if(char === '[' && squareBracket === false) {
+
+        squareBracket = true;
+
+        if(key.length > 0) {
+
+          yield key;
+          key = '';
+
+        }
+      
+      // Close square bracket, yield and reset key
+      } else if(char === ']' && squareBracket) {  
+
+        squareBracket = false;
+        
+        if(key.length > 0) {
+
+          yield key;
+          key = '';
+
+        }
+
       // Key terminator, yield key and reset
-      } else if(char === '.') {
+      } else if(char === '.' && squareBracket === false && key.length > 0) {
         
         yield key;
         key = '';
 
-      // Add char to key
+        // Add char to key
       } else {
         
         key += char;
@@ -162,10 +188,17 @@ export default class PathNotation extends String {
     }
 
   }
-
+  
   /**
-    Returns dot-notated path string.
-  */
+   * Returns dot-notated path string.
+   * @note
+   * When key contains "." character it surrounds the key in square bracket 
+   * notation.
+   * ```
+   * const pathStr = PathNotation.keysToPathNotation(['foo', 'bar.baz']);
+   * console.log(pathStr); // "foo[bar.baz]"
+   * ```
+   */
   static keysToPathNotation(keys:Iterable<string>):string {
 
     const keysIter = keys[Symbol.iterator]();
@@ -178,24 +211,33 @@ export default class PathNotation extends String {
       return '';
     }
 
-    let pathNotation = <string>keysIterResult.value.split('.').join('\\.');
-    
+    let pathNotation = keysIterResult.value.indexOf('.') > -1 
+      ? `[${keysIterResult.value}]` : keysIterResult.value;
+        
     // Handle remaining keys
     keysIterResult = keysIter.next();
     while(!keysIterResult.done) {
 
-      pathNotation = `${pathNotation}.${keysIterResult.value.split('.').join('\\.')}`;
+      if(keysIterResult.value.indexOf('.') > -1) {
+
+        pathNotation = `${pathNotation}[${keysIterResult.value}]`
+
+      } else {
+
+        pathNotation = `${pathNotation}.${keysIterResult.value}`;
+
+      }
 
       keysIterResult = keysIter.next();
 
     }
 
-    // Handle non-undefined value on true done flag
+    /* // Handle non-undefined value on true done flag
     if(typeof keysIterResult.value === 'string') {
 
       pathNotation = `${pathNotation}.${keysIterResult.value.split('.').join('\\.')}`;
 
-    }
+    } */
 
     return pathNotation;
 

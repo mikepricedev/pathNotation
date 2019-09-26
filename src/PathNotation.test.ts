@@ -29,6 +29,31 @@ describe('PathNotation',()=>{
 
       });
 
+      it(`Considers text between square brackets as key.`, ()=>{
+
+        const pathStr = 'foo[0].bar[baz]';
+
+        const result = Array.from(PathNotation.pathNotationToKeys(pathStr));
+
+        expect(result[0]).to.eq('foo');
+        expect(result[1]).to.eq('0');
+        expect(result[3]).to.eq('baz');
+
+      });
+
+      it(`Considers keys with '.' chars between square brackets as whole key.
+          e.g. [bar.baz] is key "bar.baz".`,
+        ()=>
+      {
+
+        const pathStr = 'foo[bar.baz]';
+
+        const result = Array.from(PathNotation.pathNotationToKeys(pathStr));
+
+        expect(result[1]).to.eq('bar.baz');
+
+      });
+
     });
 
     describe('keysToPathNotation',()=>{
@@ -42,11 +67,12 @@ describe('PathNotation',()=>{
 
       });
 
-      it(`Adds double backslash escaping to keys with "."`,()=>{
+      it(`Adds square bracket notation keys with "." chars`,()=>{
 
         const pathKeys = ['foo','bar', 'baz.qux'];
 
-        expect(PathNotation.keysToPathNotation(pathKeys)).to.eq('foo.bar.baz\\.qux');
+        expect(PathNotation.keysToPathNotation(pathKeys))
+          .to.eq('foo.bar[baz.qux]');
 
 
       });
