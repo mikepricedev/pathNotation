@@ -1,14 +1,4 @@
-# PathNotation
-A dot-notation based path string which yields key literals, allows
-for the inclusion of the "." character in keys and square bracket notation 
-in path strings, promotes readability of path strings and provides other 
-useful utilities for reasoning and working with objects paths.
-
-Full [docs](docs/README.md "PathNotation Documentation").
-
-## Example:
-```
-import PathNotation from 'path-notation';
+import PathNotation from './src/PathNotation';
 
 const path = new PathNotation('foo', 'bar', 2, '10','baz\\.qux');
 
@@ -37,4 +27,3 @@ for(const key of pathStr) {
 //   Key: 2; Type number
 //   Key: 10; Type string
 //   Key: baz.qux; Type string
-```
