@@ -160,12 +160,13 @@ describe('PathNotation',()=>{
 
     });
 
-    it(`Accepts 'Iterable' of strings, numbers, and/or PathNotation 
-        instances as constructor arg.`,()=>{
+    it(`Accepts strings, numbers, and/or PathNotation instances as 
+        constructor arg.`,()=>
+    {
 
       const path1 = new PathNotation('foo.bar');
 
-      const path = new PathNotation([path1, 0, 'baz']);
+      const path = new PathNotation(...[path1, 0, 'baz']);
 
       expect(path.toString()).to.equal('foo.bar[0].baz');
 
@@ -175,7 +176,7 @@ describe('PathNotation',()=>{
       ()=>
     {
 
-      const path = new PathNotation(['foo','0', 'baz.qux', 1]);
+      const path = new PathNotation(...['foo','0', 'baz\\.qux', 1]);
 
       expect(path.toString()).to.eq('foo.0[baz.qux][1]');
 

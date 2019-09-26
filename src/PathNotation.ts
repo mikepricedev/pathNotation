@@ -1,7 +1,5 @@
 const IS_INDEX_REGEX = /^(0|[1-9][0-9]*)$/;
 
-export type TpathNotaionConstructorArg = string | number | PathNotation 
-  | Iterable<string | number | PathNotation>;
 /** 
  * A dot-notation based path string which yields key literals, allows
  * for the inclusion of the "." character in keys and square bracket notation 
@@ -10,7 +8,7 @@ export type TpathNotaionConstructorArg = string | number | PathNotation
 */
 export default class PathNotation extends Array<string | number> {
 
-  constructor(...path:TpathNotaionConstructorArg[]) 
+  constructor(...path:(string | number | PathNotation)[]) 
 
   {
 
@@ -33,29 +31,8 @@ export default class PathNotation extends Array<string | number> {
           break;
   
         default:
-  
-          if(constructArg instanceof PathNotation) {
           
-            keys.push(...constructArg);
-          
-          } else {
-  
-            for(const key of constructArg) {
-              
-              if(key instanceof PathNotation) {
-
-                keys.push(...key);
-
-              } else {
-
-                keys.push(key);
-
-              }
-  
-            }
-  
-          }
-
+          keys.push(...constructArg);
           break;
         
   
@@ -95,7 +72,7 @@ export default class PathNotation extends Array<string | number> {
   //Methods
   slice(begin?:number, end?:number): PathNotation {
 
-    return new PathNotation(super.slice(begin, end));
+    return new PathNotation(...super.slice(begin, end));
 
   }
 
@@ -103,7 +80,7 @@ export default class PathNotation extends Array<string | number> {
     PathNotation 
   {
 
-    return new PathNotation(super.splice(start, deleteCount, ...items));
+    return new PathNotation(...super.splice(start, deleteCount, ...items));
 
   }
 
