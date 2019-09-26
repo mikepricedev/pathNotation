@@ -36,10 +36,30 @@ describe('PathNotation',()=>{
         const result = Array.from(PathNotation.pathNotationToKeys(pathStr));
 
         expect(result[0]).to.eq('foo');
-        expect(result[1]).to.eq('0');
+        expect(result[1]).to.eq(0);
         expect(result[3]).to.eq('baz');
 
       });
+
+      it(`Converts key representing positive integer between square
+          brackets to integer.`,()=>
+      {
+
+        const pathStr = 'foo[0].bar[12][-1].10[0.01]';
+        const result = Array.from(PathNotation.pathNotationToKeys(pathStr));
+
+        expect(result[1]).to.be.a('number');
+        expect(result[1]).to.eq(0);
+        expect(result[3]).to.be.a('number');
+        expect(result[3]).to.eq(12);
+        expect(result[4]).to.be.a('string');
+        expect(result[4]).to.eq('-1');
+        expect(result[5]).to.be.a('string');
+        expect(result[5]).to.eq('10');
+        expect(result[6]).to.be.a('string');
+        expect(result[6]).to.eq('0.01');
+
+      })
 
       it(`Considers keys with '.' chars between square brackets as whole key.
           e.g. [bar.baz] is key "bar.baz".`,
@@ -77,6 +97,18 @@ describe('PathNotation',()=>{
 
       });
 
+      it(`Uses square bracket notation with keys that are positive integers.`,
+        ()=>
+      {
+
+        const pathKeys = ['foo','0', 'baz.qux', 1];
+
+        expect(PathNotation.keysToPathNotation(pathKeys))
+          .to.eq('foo.0[baz.qux][1]');
+
+
+      });
+
     });
 
 
@@ -84,13 +116,13 @@ describe('PathNotation',()=>{
 
   describe('Instantiation',()=>{
 
-    it(`Extends 'String'.`,()=>{
+    it(`Extends 'Array'.`,()=>{
 
       const pathStr = 'foo.bar';
 
       const path = new PathNotation(pathStr);
 
-      expect(path).to.be.instanceof(String);
+      expect(path).to.be.instanceof(Array);
 
       expect(path+'').to.eq(pathStr);
 
@@ -111,7 +143,7 @@ describe('PathNotation',()=>{
 
       const path = new PathNotation(0);
 
-      expect(path.toString()).to.equal('0');
+      expect(path.toString()).to.equal('[0]');
 
     });
 
@@ -135,8 +167,37 @@ describe('PathNotation',()=>{
 
       const path = new PathNotation([path1, 0, 'baz']);
 
-      expect(path.toString()).to.equal('foo.bar.0.baz');
+      expect(path.toString()).to.equal('foo.bar[0].baz');
 
+    });
+
+    it(`Uses square bracket notation with keys that are positive integers.`,
+      ()=>
+    {
+
+      const path = new PathNotation(['foo','0', 'baz.qux', 1]);
+
+      expect(path.toString()).to.eq('foo.0[baz.qux][1]');
+
+
+    });
+
+  });
+
+  describe('Properties',()=>{
+    
+    const pathKeys = ['foo','bar','baz'];
+  
+    const path = new PathNotation(pathKeys.join('.'));
+
+    describe('length',()=>{
+  
+      it('Returns number of keys in the path.',()=>{
+  
+        expect(path).property('length').to.eq(pathKeys.length);
+  
+      });
+  
     });
 
   });
@@ -146,16 +207,6 @@ describe('PathNotation',()=>{
     const pathKeys = ['foo','bar','baz'];
 
     const path = new PathNotation(pathKeys.join('.'));
-
-    describe('numKeys',()=>{
-
-      it('Returns number of keys in the path.',()=>{
-
-        expect(path).property('numKeys').to.eq(pathKeys.length);
-
-      });
-
-    });
 
     describe('firstKey',()=>{
 
@@ -185,25 +236,11 @@ describe('PathNotation',()=>{
 
     const path = new PathNotation(pathKeys.join('.'));
 
-    describe('keys',()=>{
+    describe('slice',()=>{
 
-      it(`Returns an 'IterableIterator' of keys from the path.`,()=>{
+      it(`Returns new 'PathNotation'.`,()=>{
 
-        const result = path.keys();
-
-        expect(result).to.have.property('next');
-
-        expect(Array.from(result)).to.deep.eq(pathKeys);
-
-      });
-
-    });
-
-    describe('slicePath',()=>{
-
-      it(`Returns new 'PathNotation' instance based on String.prototype.slice().`,()=>{
-
-        const result = path.slicePath(1);
+        const result = path.slice(1);
 
         expect(result).to.be.instanceof(PathNotation);
 
@@ -211,37 +248,33 @@ describe('PathNotation',()=>{
 
       });
 
-      it(`Excepts second optional end index arg.`,()=>{
+    });
+    
+    describe('splice',()=>{
 
-        const result = path.slicePath(1,3);
+      it(`Returns new 'PathNotation'.`,()=>{
+
+        const pathKeys = ['foo','bar','qux'];
+
+        const path = new PathNotation(pathKeys.join('.'));
+
+        const result = path.splice(1, 2);
 
         expect(result).to.be.instanceof(PathNotation);
-
-        expect(result.toString()).to.eq(pathKeys.slice(1,3).join('.'));
-
+      
       });
 
     });
-    
-    describe('[Symbol.iterator]',()=>{
 
-      it(`Returns an 'IterableIterator' of keys from the path.`,()=>{
+    describe('toString',()=>{
 
-        const result = path.keys();
+      it(`Returns path string in path notation.`,()=>{
 
-        expect(result).to.have.property('next');
+        const pathStr = "foo.bar[0].baz[qux.quux]";
 
-        expect(Array.from(result)).to.deep.eq(pathKeys);
+        const path = new PathNotation(pathStr);
 
-      });
-
-      it(`Implements 'PathNotation' integrability.`,()=>{
-
-        const pathKeys = ['foo','bar', 'baz.qux'];
-
-        const path = new PathNotation(pathKeys);
-
-        expect(Array.from(path)).to.deep.equal(pathKeys);
+        expect(path.toString()).to.eq(pathStr);
 
       });
 

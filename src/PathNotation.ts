@@ -1,89 +1,88 @@
-const KEYS:unique symbol = Symbol();
+const IS_INDEX_REGEX = /^(0|[1-9][0-9]*)$/;
 
+export type TpathNotaionConstructorArg = string | number | PathNotation 
+  | Iterable<string | number | PathNotation>;
 /** 
  * A dot-notation based path string which yields key literals, allows
  * for the inclusion of the "." character in keys and square bracket notation 
  * in path strings, promotes readability of path strings and provides other 
- * useful utilities for reasoning and working with document paths.
+ * useful utilities for reasoning and working with object paths.
 */
-export default class PathNotation extends String {
-  private readonly [KEYS]:string[];
+export default class PathNotation extends Array<string | number> {
 
-  constructor(path:string | number | PathNotation | Iterable<string | number | PathNotation>) {
+  constructor(...path:TpathNotaionConstructorArg[]) 
 
-    const keys:string[] = [];
+  {
 
-    switch(typeof path) {
+    super();
 
-      case 'string':
+    const keys:(string | number)[] = [];
+
+    for(const constructArg of path) {
+
+      switch(typeof constructArg) {
+  
+        case 'string':
+          
+          keys.push(...PathNotation.pathNotationToKeys(constructArg));
+          break;
         
-        keys.push(...PathNotation.pathNotationToKeys(path));
-        break;
-      
-      case 'number':
-        
-        keys.push(path.toString());
-        break;
+        case 'number':
+          
+          keys.push(constructArg);
+          break;
+  
+        default:
+  
+          if(constructArg instanceof PathNotation) {
+          
+            keys.push(...constructArg);
+          
+          } else {
+  
+            for(const key of constructArg) {
+              
+              if(key instanceof PathNotation) {
 
-      default:{
+                keys.push(...key);
 
-        if(path instanceof PathNotation) {
-        
-          keys.push(...path[KEYS]);
-        
-        } else {
+              } else {
 
-          for(const key of path) {
+                keys.push(key);
 
-            switch(typeof key) {
-              case 'string':
-              case 'number':
-                keys.push(key.toString());
-                break;
-              default:
-                  keys.push(...key[KEYS]);
+              }
+  
             }
-
+  
           }
 
-        }
-        break;
-      
+          break;
+        
+  
       }
 
     }
-
-    super(PathNotation.keysToPathNotation(keys));
-
-    this[KEYS] = keys;
+    
+    this.push(...keys);
 
   }
 
   //Accessors
   /**
-   * Number of key literals in path.
-  */
-  get numKeys():number {
-
-    return this[KEYS].length;
-
-  }
-
-  /**
    * Root key of path.
   */
-  get firstKey():string {
+  get firstKey():string | number {
 
-    return this[KEYS][0];
+    return this[0];
 
   }
 
   /**
    * Terminal key of path.
   */
-  get lastKey():string {
+  get lastKey():string | number {
 
-    return this[KEYS][this.numKeys - 1];
+    return this[this.length - 1];
 
   }
 
@@ -94,35 +93,35 @@ export default class PathNotation extends String {
   }
 
   //Methods
-  /**
-   * Yields key literals from path.
-  */
-  *keys():IterableIterator<string> {
+  slice(begin?:number, end?:number): PathNotation {
 
-    yield* this[KEYS];
+    return new PathNotation(super.slice(begin, end));
 
+  }
+
+  splice(start?:number, deleteCount?:number, ...items:(string | number)[]):
+    PathNotation 
+  {
+
+    return new PathNotation(super.splice(start, deleteCount, ...items));
+
+  }
+
+  toString():string {
+    return PathNotation.keysToPathNotation(this);
   }
   
   /**
-   * Extracts a section of a path and returns it as a new [[PathNotation]],
-   * without modifying the original path.
-  */
-  slicePath(beginKeyIndex:number, endKeyIndex?:number): PathNotation {
-
-    return new PathNotation(this[KEYS].slice(beginKeyIndex, endKeyIndex));
-
-  }
-
-  *[Symbol.iterator]():IterableIterator<string> {
-
-    yield* this[KEYS];
-
-  }
-
-  /**
    * Yields key literals from dot-notated path.
+   * @note
+   * When string representing positive integer is in square bracket notation,
+   * the string is parsed into an integer.
+   * ```
+   * const pathKeys = Array.from(PathNotation.pathNotationToKeys("foo[2]"));
+   * console.log(pathKeys[1] === 2); // true
+   * ```
   */
-  static *pathNotationToKeys(path:string):IterableIterator<string> {
+  static *pathNotationToKeys(path:string):IterableIterator<string | number> {
     
     let key = '';
     let escaped = false;
@@ -160,16 +159,20 @@ export default class PathNotation extends String {
         
         if(key.length > 0) {
 
-          yield key;
+          yield IS_INDEX_REGEX.test(key) ? Number.parseInt(key) : key;
           key = '';
 
         }
 
       // Key terminator, yield key and reset
-      } else if(char === '.' && squareBracket === false && key.length > 0) {
+      } else if(char === '.' && squareBracket === false) {
         
-        yield key;
-        key = '';
+        if(key.length > 0){
+          
+          yield key;
+          key = '';
+
+        }
 
         // Add char to key
       } else {
@@ -190,41 +193,72 @@ export default class PathNotation extends String {
   }
   
   /**
-   * Returns dot-notated path string.
+   * Returns dot-notated and square bracket notated path string.
    * @note
-   * When key contains "." character it surrounds the key in square bracket 
-   * notation.
+   * When key contains "." character or the key is a positive integer, the key 
+   * is formatted in square bracket notation.
    * ```
-   * const pathStr = PathNotation.keysToPathNotation(['foo', 'bar.baz']);
+   * // Key with "." character
+   * let pathStr = PathNotation.keysToPathNotation(['foo', 'bar.baz']);
    * console.log(pathStr); // "foo[bar.baz]"
+   * 
+   * // Key that is positive integer
+   * pathStr = PathNotation.keysToPathNotation(['foo', 2]);
+   * console.log(pathStr); // "foo[2]"
    * ```
    */
-  static keysToPathNotation(keys:Iterable<string>):string {
+  static keysToPathNotation(keys:Iterable<string | number>):string 
+  {
 
     const keysIter = keys[Symbol.iterator]();
     
     // Handle first key
     let keysIterResult = keysIter.next();
 
+
     // Empty keys iterable
     if(keysIterResult.done){
       return '';
     }
 
-    let pathNotation = keysIterResult.value.indexOf('.') > -1 
-      ? `[${keysIterResult.value}]` : keysIterResult.value;
+    
+    let pathNotation:string;
+    let key = keysIterResult.value;
+    if(typeof key === 'number') {
+
+      pathNotation = Number.isInteger(key) && key > -1 ? `[${key}]` 
+        : key.toString();
+
+    } else {
+
+      pathNotation = key.indexOf('.') > -1 ? `[${key}]` : key;
+
+    }
         
     // Handle remaining keys
     keysIterResult = keysIter.next();
     while(!keysIterResult.done) {
 
-      if(keysIterResult.value.indexOf('.') > -1) {
+      key = keysIterResult.value;
+      if(typeof key === 'number') {
 
-        pathNotation = `${pathNotation}[${keysIterResult.value}]`
+        if(Number.isInteger(key) && key > -1) {
 
+          pathNotation = `${pathNotation}[${key}]`;
+
+        } else {
+
+          pathNotation = `${pathNotation}.${key}`;
+
+        }
+
+      } else if(key.indexOf('.') > -1){
+
+        pathNotation = `${pathNotation}[${key}]`;
+        
       } else {
-
-        pathNotation = `${pathNotation}.${keysIterResult.value}`;
+        
+        pathNotation = `${pathNotation}.${key}`;
 
       }
 
@@ -232,15 +266,9 @@ export default class PathNotation extends String {
 
     }
 
-    /* // Handle non-undefined value on true done flag
-    if(typeof keysIterResult.value === 'string') {
-
-      pathNotation = `${pathNotation}.${keysIterResult.value.split('.').join('\\.')}`;
-
-    } */
-
     return pathNotation;
 
   }
+
 
 }
