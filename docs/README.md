@@ -4,22 +4,24 @@
 # Class: PathNotation
 
 A dot-notation based path string which yields key literals, allows
-for the inclusion of "." character in keys, and provides other useful
-utilities for reasoning and working with document paths.
+for the inclusion of the "." character in keys and square bracket notation
+in path strings, promotes readability of path strings and provides other
+useful utilities for reasoning and working with object paths.
 
 ## Hierarchy
 
-* String
+* Array‹string | number›
 
   * **PathNotation**
 
 ## Indexable
 
-* \[ **index**: *number*\]: string
+* \[ **n**: *number*\]: string | number
 
 A dot-notation based path string which yields key literals, allows
-for the inclusion of "." character in keys, and provides other useful
-utilities for reasoning and working with document paths.
+for the inclusion of the "." character in keys and square bracket notation
+in path strings, promotes readability of path strings and provides other
+useful utilities for reasoning and working with object paths.
 
 ## Index
 
@@ -30,65 +32,49 @@ utilities for reasoning and working with document paths.
 ### Properties
 
 * [length](README.md#length)
-* [String](README.md#static-string)
+* [Array](README.md#static-array)
 
 ### Accessors
 
 * [__@toStringTag](README.md#__@tostringtag)
 * [firstKey](README.md#firstkey)
 * [lastKey](README.md#lastkey)
-* [numKeys](README.md#numkeys)
 
 ### Methods
 
 * [__@iterator](README.md#__@iterator)
-* [anchor](README.md#anchor)
-* [big](README.md#big)
-* [blink](README.md#blink)
-* [bold](README.md#bold)
-* [charAt](README.md#charat)
-* [charCodeAt](README.md#charcodeat)
-* [codePointAt](README.md#codepointat)
+* [__@unscopables](README.md#__@unscopables)
 * [concat](README.md#concat)
-* [endsWith](README.md#endswith)
-* [fixed](README.md#fixed)
-* [fontcolor](README.md#fontcolor)
-* [fontsize](README.md#fontsize)
+* [copyWithin](README.md#copywithin)
+* [entries](README.md#entries)
+* [every](README.md#every)
+* [fill](README.md#fill)
+* [filter](README.md#filter)
+* [find](README.md#find)
+* [findIndex](README.md#findindex)
+* [flat](README.md#flat)
+* [flatMap](README.md#flatmap)
+* [forEach](README.md#foreach)
 * [includes](README.md#includes)
 * [indexOf](README.md#indexof)
-* [italics](README.md#italics)
+* [join](README.md#join)
 * [keys](README.md#keys)
 * [lastIndexOf](README.md#lastindexof)
-* [link](README.md#link)
-* [localeCompare](README.md#localecompare)
-* [match](README.md#match)
-* [normalize](README.md#normalize)
-* [padEnd](README.md#padend)
-* [padStart](README.md#padstart)
-* [repeat](README.md#repeat)
-* [replace](README.md#replace)
-* [search](README.md#search)
+* [map](README.md#map)
+* [pop](README.md#pop)
+* [push](README.md#push)
+* [reduce](README.md#reduce)
+* [reduceRight](README.md#reduceright)
+* [reverse](README.md#reverse)
+* [shift](README.md#shift)
 * [slice](README.md#slice)
-* [slicePath](README.md#slicepath)
-* [small](README.md#small)
-* [split](README.md#split)
-* [startsWith](README.md#startswith)
-* [strike](README.md#strike)
-* [sub](README.md#sub)
-* [substr](README.md#substr)
-* [substring](README.md#substring)
-* [sup](README.md#sup)
-* [toLocaleLowerCase](README.md#tolocalelowercase)
-* [toLocaleUpperCase](README.md#tolocaleuppercase)
-* [toLowerCase](README.md#tolowercase)
+* [some](README.md#some)
+* [sort](README.md#sort)
+* [splice](README.md#splice)
+* [toLocaleString](README.md#tolocalestring)
 * [toString](README.md#tostring)
-* [toUpperCase](README.md#touppercase)
-* [trim](README.md#trim)
-* [trimEnd](README.md#trimend)
-* [trimLeft](README.md#trimleft)
-* [trimRight](README.md#trimright)
-* [trimStart](README.md#trimstart)
-* [valueOf](README.md#valueof)
+* [unshift](README.md#unshift)
+* [values](README.md#values)
 * [keysToPathNotation](README.md#static-keystopathnotation)
 * [pathNotationToKeys](README.md#static-pathnotationtokeys)
 
@@ -96,13 +82,13 @@ utilities for reasoning and working with document paths.
 
 ###  constructor
 
-\+ **new PathNotation**(`path`: string | number | [PathNotation](README.md) | Iterable‹string | number | [PathNotation](README.md)›): *[PathNotation](README.md)*
+\+ **new PathNotation**(...`path`: string | number | [PathNotation](README.md)[]): *[PathNotation](README.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`path` | string &#124; number &#124; [PathNotation](README.md) &#124; Iterable‹string &#124; number &#124; [PathNotation](README.md)› |
+`...path` | string &#124; number &#124; [PathNotation](README.md)[] |
 
 **Returns:** *[PathNotation](README.md)*
 
@@ -114,15 +100,13 @@ Name | Type |
 
 *Inherited from void*
 
-Returns the length of a String object.
+Gets or sets the length of the array. This is a number one higher than the highest element defined in an array.
 
 ___
 
-### `Static` String
+### `Static` Array
 
-▪ **String**: *StringConstructor*
-
-Allows manipulation and formatting of text strings and determination and location of substrings within strings.
+▪ **Array**: *ArrayConstructor*
 
 ## Accessors
 
@@ -136,273 +120,601 @@ ___
 
 ###  firstKey
 
-• **get firstKey**(): *string*
+• **get firstKey**(): *string | number*
 
 Root key of path.
 
-**Returns:** *string*
+**Returns:** *string | number*
 
 ___
 
 ###  lastKey
 
-• **get lastKey**(): *string*
+• **get lastKey**(): *string | number*
 
 Terminal key of path.
 
-**Returns:** *string*
-
-___
-
-###  numKeys
-
-• **get numKeys**(): *number*
-
-Number of key literals in path.
-
-**Returns:** *number*
+**Returns:** *string | number*
 
 ## Methods
 
 ###  __@iterator
 
-▸ **__@iterator**(): *IterableIterator‹string›*
-
-*Overrides void*
-
-**Returns:** *IterableIterator‹string›*
-
-___
-
-###  anchor
-
-▸ **anchor**(`name`: string): *string*
+▸ **__@iterator**(): *IterableIterator‹string | number›*
 
 *Inherited from void*
 
-Returns an <a> HTML anchor element and sets the name attribute to the text value
+Iterator
 
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`name` | string |   |
-
-**Returns:** *string*
+**Returns:** *IterableIterator‹string | number›*
 
 ___
 
-###  big
+###  __@unscopables
 
-▸ **big**(): *string*
-
-*Inherited from void*
-
-Returns a <big> HTML element
-
-**Returns:** *string*
-
-___
-
-###  blink
-
-▸ **blink**(): *string*
+▸ **__@unscopables**(): *object*
 
 *Inherited from void*
 
-Returns a <blink> HTML element
+Returns an object whose properties have the value 'true'
+when they will be absent when used in a 'with' statement.
 
-**Returns:** *string*
-
-___
-
-###  bold
-
-▸ **bold**(): *string*
-
-*Inherited from void*
-
-Returns a <b> HTML element
-
-**Returns:** *string*
-
-___
-
-###  charAt
-
-▸ **charAt**(`pos`: number): *string*
-
-*Inherited from void*
-
-Returns the character at the specified index.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`pos` | number | The zero-based index of the desired character.  |
-
-**Returns:** *string*
-
-___
-
-###  charCodeAt
-
-▸ **charCodeAt**(`index`: number): *number*
-
-*Inherited from void*
-
-Returns the Unicode value of the character at the specified location.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`index` | number | The zero-based index of the desired character. If there is no character at the specified index, NaN is returned.  |
-
-**Returns:** *number*
-
-___
-
-###  codePointAt
-
-▸ **codePointAt**(`pos`: number): *number | undefined*
-
-*Inherited from void*
-
-Returns a nonnegative integer Number less than 1114112 (0x110000) that is the code point
-value of the UTF-16 encoded code point starting at the string element at position pos in
-the String resulting from converting this object to a String.
-If there is no element at that position, the result is undefined.
-If a valid UTF-16 surrogate pair does not begin at pos, the result is the code unit at pos.
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`pos` | number |
-
-**Returns:** *number | undefined*
+**Returns:** *object*
 
 ___
 
 ###  concat
 
-▸ **concat**(...`strings`: string[]): *string*
+▸ **concat**(...`items`: ConcatArray‹string | number›[]): *string | number[]*
 
 *Inherited from void*
 
-Returns a string that contains the concatenation of two or more strings.
+Combines two or more arrays.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`...strings` | string[] | The strings to append to the end of the string.  |
+`...items` | ConcatArray‹string &#124; number›[] | Additional items to add to the end of array1.  |
 
-**Returns:** *string*
+**Returns:** *string | number[]*
 
-___
-
-###  endsWith
-
-▸ **endsWith**(`searchString`: string, `endPosition?`: number): *boolean*
+▸ **concat**(...`items`: T | ConcatArray‹T›[]): *string | number[]*
 
 *Inherited from void*
 
-Returns true if the sequence of elements of searchString converted to a String is the
-same as the corresponding elements of this object (converted to a String) starting at
-endPosition – length(this). Otherwise returns false.
+Combines two or more arrays.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`...items` | T &#124; ConcatArray‹T›[] | Additional items to add to the end of array1.  |
+
+**Returns:** *string | number[]*
+
+___
+
+###  copyWithin
+
+▸ **copyWithin**(`target`: number, `start`: number, `end?`: number): *this*
+
+*Inherited from void*
+
+Returns the this object after copying a section of the array identified by start and end
+to the same array starting at position target
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`target` | number | If target is negative, it is treated as length+target where length is the length of the array. |
+`start` | number | If start is negative, it is treated as length+start. If end is negative, it is treated as length+end. |
+`end?` | number | If not specified, length of the this object is used as its default value.  |
+
+**Returns:** *this*
+
+___
+
+###  entries
+
+▸ **entries**(): *IterableIterator‹[number, string | number]›*
+
+*Inherited from void*
+
+Returns an iterable of key, value pairs for every entry in the array
+
+**Returns:** *IterableIterator‹[number, string | number]›*
+
+___
+
+###  every
+
+▸ **every**(`callbackfn`: function, `thisArg?`: any): *boolean*
+
+*Inherited from void*
+
+Determines whether all the members of an array satisfy the specified test.
+
+**Parameters:**
+
+▪ **callbackfn**: *function*
+
+A function that accepts up to three arguments. The every method calls the callbackfn function for each element in array1 until the callbackfn returns false, or until the end of the array.
+
+▸ (`value`: string | number, `index`: number, `array`: string | number[]): *unknown*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`searchString` | string |
-`endPosition?` | number |
+`value` | string &#124; number |
+`index` | number |
+`array` | string &#124; number[] |
+
+▪`Optional`  **thisArg**: *any*
+
+An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
 
 **Returns:** *boolean*
 
 ___
 
-###  fixed
+###  fill
 
-▸ **fixed**(): *string*
-
-*Inherited from void*
-
-Returns a <tt> HTML element
-
-**Returns:** *string*
-
-___
-
-###  fontcolor
-
-▸ **fontcolor**(`color`: string): *string*
+▸ **fill**(`value`: string | number, `start?`: number, `end?`: number): *this*
 
 *Inherited from void*
 
-Returns a <font> HTML element and sets the color attribute value
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`color` | string |
-
-**Returns:** *string*
-
-___
-
-###  fontsize
-
-▸ **fontsize**(`size`: number): *string*
-
-*Inherited from void*
-
-Returns a <font> HTML element and sets the size attribute value
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`size` | number |
-
-**Returns:** *string*
-
-▸ **fontsize**(`size`: string): *string*
-
-*Inherited from void*
-
-Returns a <font> HTML element and sets the size attribute value
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`size` | string |
-
-**Returns:** *string*
-
-___
-
-###  includes
-
-▸ **includes**(`searchString`: string, `position?`: number): *boolean*
-
-*Inherited from void*
-
-Returns true if searchString appears as a substring of the result of converting this
-object to a String, at one or more positions that are
-greater than or equal to position; otherwise, returns false.
+Returns the this object after filling the section identified by start and end with value
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`searchString` | string | search string |
-`position?` | number | If position is undefined, 0 is assumed, so as to search all of the String.  |
+`value` | string &#124; number | value to fill array section with |
+`start?` | number | index to start filling the array at. If start is negative, it is treated as length+start where length is the length of the array. |
+`end?` | number | index to stop filling the array at. If end is negative, it is treated as length+end.  |
+
+**Returns:** *this*
+
+___
+
+###  filter
+
+▸ **filter**<**S**>(`callbackfn`: function, `thisArg?`: any): *S[]*
+
+*Inherited from void*
+
+Returns the elements of an array that meet the condition specified in a callback function.
+
+**Type parameters:**
+
+▪ **S**: *string | number*
+
+**Parameters:**
+
+▪ **callbackfn**: *function*
+
+A function that accepts up to three arguments. The filter method calls the callbackfn function one time for each element in the array.
+
+▸ (`value`: string | number, `index`: number, `array`: string | number[]): *boolean*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`value` | string &#124; number |
+`index` | number |
+`array` | string &#124; number[] |
+
+▪`Optional`  **thisArg**: *any*
+
+An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
+
+**Returns:** *S[]*
+
+▸ **filter**(`callbackfn`: function, `thisArg?`: any): *string | number[]*
+
+*Inherited from void*
+
+Returns the elements of an array that meet the condition specified in a callback function.
+
+**Parameters:**
+
+▪ **callbackfn**: *function*
+
+A function that accepts up to three arguments. The filter method calls the callbackfn function one time for each element in the array.
+
+▸ (`value`: string | number, `index`: number, `array`: string | number[]): *unknown*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`value` | string &#124; number |
+`index` | number |
+`array` | string &#124; number[] |
+
+▪`Optional`  **thisArg**: *any*
+
+An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
+
+**Returns:** *string | number[]*
+
+___
+
+###  find
+
+▸ **find**<**S**>(`predicate`: function, `thisArg?`: any): *S | undefined*
+
+*Inherited from void*
+
+Returns the value of the first element in the array where predicate is true, and undefined
+otherwise.
+
+**Type parameters:**
+
+▪ **S**: *string | number*
+
+**Parameters:**
+
+▪ **predicate**: *function*
+
+find calls predicate once for each element of the array, in ascending
+order, until it finds one where predicate returns true. If such an element is found, find
+immediately returns that element value. Otherwise, find returns undefined.
+
+▸ (`this`: void, `value`: string | number, `index`: number, `obj`: string | number[]): *boolean*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`this` | void |
+`value` | string &#124; number |
+`index` | number |
+`obj` | string &#124; number[] |
+
+▪`Optional`  **thisArg**: *any*
+
+If provided, it will be used as the this value for each invocation of
+predicate. If it is not provided, undefined is used instead.
+
+**Returns:** *S | undefined*
+
+▸ **find**(`predicate`: function, `thisArg?`: any): *string | number | undefined*
+
+*Inherited from void*
+
+**Parameters:**
+
+▪ **predicate**: *function*
+
+▸ (`value`: string | number, `index`: number, `obj`: string | number[]): *unknown*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`value` | string &#124; number |
+`index` | number |
+`obj` | string &#124; number[] |
+
+▪`Optional`  **thisArg**: *any*
+
+**Returns:** *string | number | undefined*
+
+___
+
+###  findIndex
+
+▸ **findIndex**(`predicate`: function, `thisArg?`: any): *number*
+
+*Inherited from void*
+
+Returns the index of the first element in the array where predicate is true, and -1
+otherwise.
+
+**Parameters:**
+
+▪ **predicate**: *function*
+
+find calls predicate once for each element of the array, in ascending
+order, until it finds one where predicate returns true. If such an element is found,
+findIndex immediately returns that element index. Otherwise, findIndex returns -1.
+
+▸ (`value`: string | number, `index`: number, `obj`: string | number[]): *unknown*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`value` | string &#124; number |
+`index` | number |
+`obj` | string &#124; number[] |
+
+▪`Optional`  **thisArg**: *any*
+
+If provided, it will be used as the this value for each invocation of
+predicate. If it is not provided, undefined is used instead.
+
+**Returns:** *number*
+
+___
+
+###  flat
+
+▸ **flat**<**U**>(`this`: U[][][][][][][][], `depth`: 7): *U[]*
+
+*Inherited from void*
+
+Returns a new array with all sub-array elements concatenated into it recursively up to the
+specified depth.
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`this` | U[][][][][][][][] | - |
+`depth` | 7 | The maximum recursion depth  |
+
+**Returns:** *U[]*
+
+▸ **flat**<**U**>(`this`: U[][][][][][][], `depth`: 6): *U[]*
+
+*Inherited from void*
+
+Returns a new array with all sub-array elements concatenated into it recursively up to the
+specified depth.
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`this` | U[][][][][][][] | - |
+`depth` | 6 | The maximum recursion depth  |
+
+**Returns:** *U[]*
+
+▸ **flat**<**U**>(`this`: U[][][][][][], `depth`: 5): *U[]*
+
+*Inherited from void*
+
+Returns a new array with all sub-array elements concatenated into it recursively up to the
+specified depth.
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`this` | U[][][][][][] | - |
+`depth` | 5 | The maximum recursion depth  |
+
+**Returns:** *U[]*
+
+▸ **flat**<**U**>(`this`: U[][][][][], `depth`: 4): *U[]*
+
+*Inherited from void*
+
+Returns a new array with all sub-array elements concatenated into it recursively up to the
+specified depth.
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`this` | U[][][][][] | - |
+`depth` | 4 | The maximum recursion depth  |
+
+**Returns:** *U[]*
+
+▸ **flat**<**U**>(`this`: U[][][][], `depth`: 3): *U[]*
+
+*Inherited from void*
+
+Returns a new array with all sub-array elements concatenated into it recursively up to the
+specified depth.
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`this` | U[][][][] | - |
+`depth` | 3 | The maximum recursion depth  |
+
+**Returns:** *U[]*
+
+▸ **flat**<**U**>(`this`: U[][][], `depth`: 2): *U[]*
+
+*Inherited from void*
+
+Returns a new array with all sub-array elements concatenated into it recursively up to the
+specified depth.
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`this` | U[][][] | - |
+`depth` | 2 | The maximum recursion depth  |
+
+**Returns:** *U[]*
+
+▸ **flat**<**U**>(`this`: U[][], `depth?`: 1): *U[]*
+
+*Inherited from void*
+
+Returns a new array with all sub-array elements concatenated into it recursively up to the
+specified depth.
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`this` | U[][] | - |
+`depth?` | 1 | The maximum recursion depth  |
+
+**Returns:** *U[]*
+
+▸ **flat**<**U**>(`this`: U[], `depth`: 0): *U[]*
+
+*Inherited from void*
+
+Returns a new array with all sub-array elements concatenated into it recursively up to the
+specified depth.
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`this` | U[] | - |
+`depth` | 0 | The maximum recursion depth  |
+
+**Returns:** *U[]*
+
+▸ **flat**<**U**>(`depth?`: number): *any[]*
+
+*Inherited from void*
+
+Returns a new array with all sub-array elements concatenated into it recursively up to the
+specified depth. If no depth is provided, flat method defaults to the depth of 1.
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`depth?` | number | The maximum recursion depth  |
+
+**Returns:** *any[]*
+
+___
+
+###  flatMap
+
+▸ **flatMap**<**U**, **This**>(`callback`: function, `thisArg?`: This): *U[]*
+
+*Inherited from void*
+
+Calls a defined callback function on each element of an array. Then, flattens the result into
+a new array.
+This is identical to a map followed by flat with depth 1.
+
+**Type parameters:**
+
+▪ **U**
+
+▪ **This**
+
+**Parameters:**
+
+▪ **callback**: *function*
+
+A function that accepts up to three arguments. The flatMap method calls the
+callback function one time for each element in the array.
+
+▸ (`this`: This, `value`: string | number, `index`: number, `array`: string | number[]): *U | ReadonlyArray‹U›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`this` | This |
+`value` | string &#124; number |
+`index` | number |
+`array` | string &#124; number[] |
+
+▪`Optional`  **thisArg**: *This*
+
+An object to which the this keyword can refer in the callback function. If
+thisArg is omitted, undefined is used as the this value.
+
+**Returns:** *U[]*
+
+___
+
+###  forEach
+
+▸ **forEach**(`callbackfn`: function, `thisArg?`: any): *void*
+
+*Inherited from void*
+
+Performs the specified action for each element in an array.
+
+**Parameters:**
+
+▪ **callbackfn**: *function*
+
+A function that accepts up to three arguments. forEach calls the callbackfn function one time for each element in the array.
+
+▸ (`value`: string | number, `index`: number, `array`: string | number[]): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`value` | string &#124; number |
+`index` | number |
+`array` | string &#124; number[] |
+
+▪`Optional`  **thisArg**: *any*
+
+An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
+
+**Returns:** *void*
+
+___
+
+###  includes
+
+▸ **includes**(`searchElement`: string | number, `fromIndex?`: number): *boolean*
+
+*Inherited from void*
+
+Determines whether an array includes a certain element, returning true or false as appropriate.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`searchElement` | string &#124; number | The element to search for. |
+`fromIndex?` | number | The position in this array at which to begin searching for searchElement.  |
 
 **Returns:** *boolean*
 
@@ -410,30 +722,36 @@ ___
 
 ###  indexOf
 
-▸ **indexOf**(`searchString`: string, `position?`: number): *number*
+▸ **indexOf**(`searchElement`: string | number, `fromIndex?`: number): *number*
 
 *Inherited from void*
 
-Returns the position of the first occurrence of a substring.
+Returns the index of the first occurrence of a value in an array.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`searchString` | string | The substring to search for in the string |
-`position?` | number | The index at which to begin searching the String object. If omitted, search starts at the beginning of the string.  |
+`searchElement` | string &#124; number | The value to locate in the array. |
+`fromIndex?` | number | The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.  |
 
 **Returns:** *number*
 
 ___
 
-###  italics
+###  join
 
-▸ **italics**(): *string*
+▸ **join**(`separator?`: string): *string*
 
 *Inherited from void*
 
-Returns an <i> HTML element
+Adds all the elements of an array separated by the specified separator string.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`separator?` | string | A string used to separate one element of an array from the next in the resulting String. If omitted, the array elements are separated with a comma.  |
 
 **Returns:** *string*
 
@@ -441,450 +759,396 @@ ___
 
 ###  keys
 
-▸ **keys**(): *IterableIterator‹string›*
+▸ **keys**(): *IterableIterator‹number›*
 
-Yields key literals from path.
+*Inherited from void*
 
-**Returns:** *IterableIterator‹string›*
+Returns an iterable of keys in the array
+
+**Returns:** *IterableIterator‹number›*
 
 ___
 
 ###  lastIndexOf
 
-▸ **lastIndexOf**(`searchString`: string, `position?`: number): *number*
+▸ **lastIndexOf**(`searchElement`: string | number, `fromIndex?`: number): *number*
 
 *Inherited from void*
 
-Returns the last occurrence of a substring in the string.
+Returns the index of the last occurrence of a specified value in an array.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`searchString` | string | The substring to search for. |
-`position?` | number | The index at which to begin searching. If omitted, the search begins at the end of the string.  |
+`searchElement` | string &#124; number | The value to locate in the array. |
+`fromIndex?` | number | The array index at which to begin the search. If fromIndex is omitted, the search starts at the last index in the array.  |
 
 **Returns:** *number*
 
 ___
 
-###  link
+###  map
 
-▸ **link**(`url`: string): *string*
+▸ **map**<**U**>(`callbackfn`: function, `thisArg?`: any): *U[]*
 
 *Inherited from void*
 
-Returns an <a> HTML element and sets the href attribute value
+Calls a defined callback function on each element of an array, and returns an array that contains the results.
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+▪ **callbackfn**: *function*
+
+A function that accepts up to three arguments. The map method calls the callbackfn function one time for each element in the array.
+
+▸ (`value`: string | number, `index`: number, `array`: string | number[]): *U*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`url` | string |
+`value` | string &#124; number |
+`index` | number |
+`array` | string &#124; number[] |
 
-**Returns:** *string*
+▪`Optional`  **thisArg**: *any*
+
+An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
+
+**Returns:** *U[]*
 
 ___
 
-###  localeCompare
+###  pop
 
-▸ **localeCompare**(`that`: string): *number*
+▸ **pop**(): *string | number | undefined*
 
 *Inherited from void*
 
-*Overrides void*
+Removes the last element from an array and returns it.
 
-Determines whether two strings are equivalent in the current locale.
+**Returns:** *string | number | undefined*
+
+___
+
+###  push
+
+▸ **push**(...`items`: string | number[]): *number*
+
+*Inherited from void*
+
+Appends new elements to an array, and returns the new length of the array.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`that` | string | String to compare to target string  |
+`...items` | string &#124; number[] | New elements of the Array.  |
 
 **Returns:** *number*
 
 ___
 
-###  match
+###  reduce
 
-▸ **match**(`regexp`: string | RegExp): *RegExpMatchArray | null*
-
-*Inherited from void*
-
-*Overrides void*
-
-Matches a string with a regular expression, and returns an array containing the results of that search.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`regexp` | string &#124; RegExp | A variable name or string literal containing the regular expression pattern and flags.  |
-
-**Returns:** *RegExpMatchArray | null*
-
-___
-
-###  normalize
-
-▸ **normalize**(`form`: "NFC" | "NFD" | "NFKC" | "NFKD"): *string*
+▸ **reduce**(`callbackfn`: function): *string | number*
 
 *Inherited from void*
 
-Returns the String value result of normalizing the string into the normalization form
-named by form as specified in Unicode Standard Annex #15, Unicode Normalization Forms.
+Calls the specified callback function for all the elements in an array. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`form` | "NFC" &#124; "NFD" &#124; "NFKC" &#124; "NFKD" | Applicable values: "NFC", "NFD", "NFKC", or "NFKD", If not specified default is "NFC"  |
+▪ **callbackfn**: *function*
 
-**Returns:** *string*
+A function that accepts up to four arguments. The reduce method calls the callbackfn function one time for each element in the array.
 
-▸ **normalize**(`form?`: string): *string*
-
-*Inherited from void*
-
-Returns the String value result of normalizing the string into the normalization form
-named by form as specified in Unicode Standard Annex #15, Unicode Normalization Forms.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`form?` | string | Applicable values: "NFC", "NFD", "NFKC", or "NFKD", If not specified default is "NFC"  |
-
-**Returns:** *string*
-
-___
-
-###  padEnd
-
-▸ **padEnd**(`maxLength`: number, `fillString?`: string): *string*
-
-*Inherited from void*
-
-Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length.
-The padding is applied from the end (right) of the current string.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`maxLength` | number | The length of the resulting string once the current string has been padded.        If this parameter is smaller than the current string's length, the current string will be returned as it is.  |
-`fillString?` | string | The string to pad the current string with.        If this string is too long, it will be truncated and the left-most part will be applied.        The default value for this parameter is " " (U+0020).  |
-
-**Returns:** *string*
-
-___
-
-###  padStart
-
-▸ **padStart**(`maxLength`: number, `fillString?`: string): *string*
-
-*Inherited from void*
-
-Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length.
-The padding is applied from the start (left) of the current string.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`maxLength` | number | The length of the resulting string once the current string has been padded.        If this parameter is smaller than the current string's length, the current string will be returned as it is.  |
-`fillString?` | string | The string to pad the current string with.        If this string is too long, it will be truncated and the left-most part will be applied.        The default value for this parameter is " " (U+0020).  |
-
-**Returns:** *string*
-
-___
-
-###  repeat
-
-▸ **repeat**(`count`: number): *string*
-
-*Inherited from void*
-
-Returns a String value that is made from count copies appended together. If count is 0,
-the empty string is returned.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`count` | number | number of copies to append  |
-
-**Returns:** *string*
-
-___
-
-###  replace
-
-▸ **replace**(`searchValue`: string | RegExp, `replaceValue`: string): *string*
-
-*Inherited from void*
-
-*Overrides void*
-
-Replaces text in a string, using a regular expression or search string.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`searchValue` | string &#124; RegExp | A string to search for. |
-`replaceValue` | string | A string containing the text to replace for every successful match of searchValue in this string.  |
-
-**Returns:** *string*
-
-▸ **replace**(`searchValue`: string | RegExp, `replacer`: function): *string*
-
-*Inherited from void*
-
-*Overrides void*
-
-Replaces text in a string, using a regular expression or search string.
-
-**Parameters:**
-
-▪ **searchValue**: *string | RegExp*
-
-A string to search for.
-
-▪ **replacer**: *function*
-
-A function that returns the replacement text.
-
-▸ (`substring`: string, ...`args`: any[]): *string*
+▸ (`previousValue`: string | number, `currentValue`: string | number, `currentIndex`: number, `array`: string | number[]): *string | number*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`substring` | string |
-`...args` | any[] |
+`previousValue` | string &#124; number |
+`currentValue` | string &#124; number |
+`currentIndex` | number |
+`array` | string &#124; number[] |
 
-**Returns:** *string*
+**Returns:** *string | number*
 
-___
-
-###  search
-
-▸ **search**(`regexp`: string | RegExp): *number*
+▸ **reduce**(`callbackfn`: function, `initialValue`: string | number): *string | number*
 
 *Inherited from void*
 
-*Overrides void*
+**Parameters:**
 
-Finds the first substring match in a regular expression search.
+▪ **callbackfn**: *function*
+
+▸ (`previousValue`: string | number, `currentValue`: string | number, `currentIndex`: number, `array`: string | number[]): *string | number*
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`regexp` | string &#124; RegExp | The regular expression pattern and applicable flags.  |
+Name | Type |
+------ | ------ |
+`previousValue` | string &#124; number |
+`currentValue` | string &#124; number |
+`currentIndex` | number |
+`array` | string &#124; number[] |
 
-**Returns:** *number*
+▪ **initialValue**: *string | number*
+
+**Returns:** *string | number*
+
+▸ **reduce**<**U**>(`callbackfn`: function, `initialValue`: U): *U*
+
+*Inherited from void*
+
+Calls the specified callback function for all the elements in an array. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+▪ **callbackfn**: *function*
+
+A function that accepts up to four arguments. The reduce method calls the callbackfn function one time for each element in the array.
+
+▸ (`previousValue`: U, `currentValue`: string | number, `currentIndex`: number, `array`: string | number[]): *U*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`previousValue` | U |
+`currentValue` | string &#124; number |
+`currentIndex` | number |
+`array` | string &#124; number[] |
+
+▪ **initialValue**: *U*
+
+If initialValue is specified, it is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
+
+**Returns:** *U*
+
+___
+
+###  reduceRight
+
+▸ **reduceRight**(`callbackfn`: function): *string | number*
+
+*Inherited from void*
+
+Calls the specified callback function for all the elements in an array, in descending order. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
+
+**Parameters:**
+
+▪ **callbackfn**: *function*
+
+A function that accepts up to four arguments. The reduceRight method calls the callbackfn function one time for each element in the array.
+
+▸ (`previousValue`: string | number, `currentValue`: string | number, `currentIndex`: number, `array`: string | number[]): *string | number*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`previousValue` | string &#124; number |
+`currentValue` | string &#124; number |
+`currentIndex` | number |
+`array` | string &#124; number[] |
+
+**Returns:** *string | number*
+
+▸ **reduceRight**(`callbackfn`: function, `initialValue`: string | number): *string | number*
+
+*Inherited from void*
+
+**Parameters:**
+
+▪ **callbackfn**: *function*
+
+▸ (`previousValue`: string | number, `currentValue`: string | number, `currentIndex`: number, `array`: string | number[]): *string | number*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`previousValue` | string &#124; number |
+`currentValue` | string &#124; number |
+`currentIndex` | number |
+`array` | string &#124; number[] |
+
+▪ **initialValue**: *string | number*
+
+**Returns:** *string | number*
+
+▸ **reduceRight**<**U**>(`callbackfn`: function, `initialValue`: U): *U*
+
+*Inherited from void*
+
+Calls the specified callback function for all the elements in an array, in descending order. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+▪ **callbackfn**: *function*
+
+A function that accepts up to four arguments. The reduceRight method calls the callbackfn function one time for each element in the array.
+
+▸ (`previousValue`: U, `currentValue`: string | number, `currentIndex`: number, `array`: string | number[]): *U*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`previousValue` | U |
+`currentValue` | string &#124; number |
+`currentIndex` | number |
+`array` | string &#124; number[] |
+
+▪ **initialValue**: *U*
+
+If initialValue is specified, it is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
+
+**Returns:** *U*
+
+___
+
+###  reverse
+
+▸ **reverse**(): *string | number[]*
+
+*Inherited from void*
+
+Reverses the elements in an Array.
+
+**Returns:** *string | number[]*
+
+___
+
+###  shift
+
+▸ **shift**(): *string | number | undefined*
+
+*Inherited from void*
+
+Removes the first element from an array and returns it.
+
+**Returns:** *string | number | undefined*
 
 ___
 
 ###  slice
 
-▸ **slice**(`start?`: number, `end?`: number): *string*
+▸ **slice**(`begin?`: number, `end?`: number): *[PathNotation](README.md)*
 
-*Inherited from void*
-
-Returns a section of a string.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`start?` | number | The index to the beginning of the specified portion of stringObj. |
-`end?` | number | The index to the end of the specified portion of stringObj. The substring includes the characters up to, but not including, the character indicated by end. If this value is not specified, the substring continues to the end of stringObj.  |
-
-**Returns:** *string*
-
-___
-
-###  slicePath
-
-▸ **slicePath**(`beginKeyIndex`: number, `endKeyIndex?`: number): *[PathNotation](README.md)*
-
-Extracts a section of a path and returns it as a new [PathNotation](README.md),
-without modifying the original path.
+*Overrides void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`beginKeyIndex` | number |
-`endKeyIndex?` | number |
+`begin?` | number |
+`end?` | number |
 
 **Returns:** *[PathNotation](README.md)*
 
 ___
 
-###  small
+###  some
 
-▸ **small**(): *string*
-
-*Inherited from void*
-
-Returns a <small> HTML element
-
-**Returns:** *string*
-
-___
-
-###  split
-
-▸ **split**(`separator`: string | RegExp, `limit?`: number): *string[]*
+▸ **some**(`callbackfn`: function, `thisArg?`: any): *boolean*
 
 *Inherited from void*
 
-*Overrides void*
-
-Split a string into substrings using the specified separator and return them as an array.
+Determines whether the specified callback function returns true for any element of an array.
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`separator` | string &#124; RegExp | A string that identifies character or characters to use in separating the string. If omitted, a single-element array containing the entire string is returned. |
-`limit?` | number | A value used to limit the number of elements returned in the array.  |
+▪ **callbackfn**: *function*
 
-**Returns:** *string[]*
+A function that accepts up to three arguments. The some method calls the callbackfn function for each element in array1 until the callbackfn returns true, or until the end of the array.
 
-___
-
-###  startsWith
-
-▸ **startsWith**(`searchString`: string, `position?`: number): *boolean*
-
-*Inherited from void*
-
-Returns true if the sequence of elements of searchString converted to a String is the
-same as the corresponding elements of this object (converted to a String) starting at
-position. Otherwise returns false.
+▸ (`value`: string | number, `index`: number, `array`: string | number[]): *unknown*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`searchString` | string |
-`position?` | number |
+`value` | string &#124; number |
+`index` | number |
+`array` | string &#124; number[] |
+
+▪`Optional`  **thisArg**: *any*
+
+An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
 
 **Returns:** *boolean*
 
 ___
 
-###  strike
+###  sort
 
-▸ **strike**(): *string*
-
-*Inherited from void*
-
-Returns a <strike> HTML element
-
-**Returns:** *string*
-
-___
-
-###  sub
-
-▸ **sub**(): *string*
+▸ **sort**(`compareFn?`: function): *this*
 
 *Inherited from void*
 
-Returns a <sub> HTML element
-
-**Returns:** *string*
-
-___
-
-###  substr
-
-▸ **substr**(`from`: number, `length?`: number): *string*
-
-*Inherited from void*
-
-Gets a substring beginning at the specified location and having the specified length.
+Sorts an array.
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`from` | number | The starting position of the desired substring. The index of the first character in the string is zero. |
-`length?` | number | The number of characters to include in the returned substring.  |
+▪`Optional`  **compareFn**: *function*
 
-**Returns:** *string*
+The name of the function used to determine the order of the elements. If omitted, the elements are sorted in ascending, ASCII character order.
 
-___
-
-###  substring
-
-▸ **substring**(`start`: number, `end?`: number): *string*
-
-*Inherited from void*
-
-Returns the substring at the specified location within a String object.
+▸ (`a`: string | number, `b`: string | number): *number*
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`start` | number | The zero-based index number indicating the beginning of the substring. |
-`end?` | number | Zero-based index number indicating the end of the substring. The substring includes the characters up to, but not including, the character indicated by end. If end is omitted, the characters from start through the end of the original string are returned.  |
+Name | Type |
+------ | ------ |
+`a` | string &#124; number |
+`b` | string &#124; number |
 
-**Returns:** *string*
-
-___
-
-###  sup
-
-▸ **sup**(): *string*
-
-*Inherited from void*
-
-Returns a <sup> HTML element
-
-**Returns:** *string*
+**Returns:** *this*
 
 ___
 
-###  toLocaleLowerCase
+###  splice
 
-▸ **toLocaleLowerCase**(): *string*
+▸ **splice**(`start?`: number, `deleteCount?`: number, ...`items`: string | number[]): *[PathNotation](README.md)*
 
-*Inherited from void*
+*Overrides void*
 
-Converts all alphabetic characters to lowercase, taking into account the host environment's current locale.
+**Parameters:**
 
-**Returns:** *string*
+Name | Type |
+------ | ------ |
+`start?` | number |
+`deleteCount?` | number |
+`...items` | string &#124; number[] |
 
-___
-
-###  toLocaleUpperCase
-
-▸ **toLocaleUpperCase**(): *string*
-
-*Inherited from void*
-
-Returns a string where all alphabetic characters have been converted to uppercase, taking into account the host environment's current locale.
-
-**Returns:** *string*
+**Returns:** *[PathNotation](README.md)*
 
 ___
 
-###  toLowerCase
+###  toLocaleString
 
-▸ **toLowerCase**(): *string*
+▸ **toLocaleString**(): *string*
 
 *Inherited from void*
 
-Converts all the alphabetic characters in a string to lowercase.
+Returns a string representation of an array. The elements are converted to string using their toLocalString methods.
 
 **Returns:** *string*
 
@@ -894,113 +1158,66 @@ ___
 
 ▸ **toString**(): *string*
 
-*Inherited from void*
-
-Returns a string representation of a string.
-
-**Returns:** *string*
-
-___
-
-###  toUpperCase
-
-▸ **toUpperCase**(): *string*
-
-*Inherited from void*
-
-Converts all the alphabetic characters in a string to uppercase.
-
-**Returns:** *string*
-
-___
-
-###  trim
-
-▸ **trim**(): *string*
-
-*Inherited from void*
-
-Removes the leading and trailing white space and line terminator characters from a string.
-
-**Returns:** *string*
-
-___
-
-###  trimEnd
-
-▸ **trimEnd**(): *string*
-
-*Inherited from void*
-
-Removes the trailing white space and line terminator characters from a string.
-
-**Returns:** *string*
-
-___
-
-###  trimLeft
-
-▸ **trimLeft**(): *string*
-
-*Inherited from void*
-
 *Overrides void*
 
-Removes the trailing white space and line terminator characters from a string.
-
 **Returns:** *string*
 
 ___
 
-###  trimRight
+###  unshift
 
-▸ **trimRight**(): *string*
+▸ **unshift**(...`items`: string | number[]): *number*
 
 *Inherited from void*
 
-*Overrides void*
+Inserts new elements at the start of an array.
 
-Removes the leading white space and line terminator characters from a string.
+**Parameters:**
 
-**Returns:** *string*
+Name | Type | Description |
+------ | ------ | ------ |
+`...items` | string &#124; number[] | Elements to insert at the start of the Array.  |
+
+**Returns:** *number*
 
 ___
 
-###  trimStart
+###  values
 
-▸ **trimStart**(): *string*
-
-*Inherited from void*
-
-Removes the leading white space and line terminator characters from a string.
-
-**Returns:** *string*
-
-___
-
-###  valueOf
-
-▸ **valueOf**(): *string*
+▸ **values**(): *IterableIterator‹string | number›*
 
 *Inherited from void*
 
-Returns the primitive value of the specified object.
+Returns an iterable of values in the array
 
-**Returns:** *string*
+**Returns:** *IterableIterator‹string | number›*
 
 ___
 
 ### `Static` keysToPathNotation
 
-▸ **keysToPathNotation**(`keys`: Iterable‹string›): *string*
+▸ **keysToPathNotation**(`keys`: Iterable‹string | number›): *string*
 
-Returns dot-notated path string.
+Returns dot-notated and square bracket notated path string.
+
+**`note`** 
+When key contains "." character or the key is a positive integer, the key
+is formatted in square bracket notation.
+```
+// Key with "." character
+let pathStr = PathNotation.keysToPathNotation(['foo', 'bar.baz']);
+console.log(pathStr); // "foo[bar.baz]"
+
+// Key that is positive integer
+pathStr = PathNotation.keysToPathNotation(['foo', 2]);
+console.log(pathStr); // "foo[2]"
+```
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`keys` | Iterable‹string› |
+`keys` | Iterable‹string &#124; number› |
 
 **Returns:** *string*
 
@@ -1008,9 +1225,17 @@ ___
 
 ### `Static` pathNotationToKeys
 
-▸ **pathNotationToKeys**(`path`: string): *IterableIterator‹string›*
+▸ **pathNotationToKeys**(`path`: string): *IterableIterator‹string | number›*
 
 Yields key literals from dot-notated path.
+
+**`note`** 
+When string representing positive integer is in square bracket notation,
+the string is parsed into an integer.
+```
+const pathKeys = Array.from(PathNotation.pathNotationToKeys("foo[2]"));
+console.log(pathKeys[1] === 2); // true
+```
 
 **Parameters:**
 
@@ -1018,4 +1243,4 @@ Name | Type |
 ------ | ------ |
 `path` | string |
 
-**Returns:** *IterableIterator‹string›*
+**Returns:** *IterableIterator‹string | number›*

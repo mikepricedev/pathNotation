@@ -1,42 +1,48 @@
-declare const KEYS: unique symbol;
 /**
  * A dot-notation based path string which yields key literals, allows
- * for the inclusion of "." character in keys, and provides other useful
- * utilities for reasoning and working with document paths.
+ * for the inclusion of the "." character in keys and square bracket notation
+ * in path strings, promotes readability of path strings and provides other
+ * useful utilities for reasoning and working with object paths.
 */
-export default class PathNotation extends String {
-    private readonly [KEYS];
-    constructor(path: string | number | PathNotation | Iterable<string | number | PathNotation>);
-    /**
-     * Number of key literals in path.
-    */
-    readonly numKeys: number;
+export default class PathNotation extends Array<string | number> {
+    constructor(...path: (string | number | PathNotation)[]);
     /**
      * Root key of path.
     */
-    readonly firstKey: string;
+    readonly firstKey: string | number;
     /**
      * Terminal key of path.
     */
-    readonly lastKey: string;
+    readonly lastKey: string | number;
     readonly [Symbol.toStringTag]: string;
-    /**
-     * Yields key literals from path.
-    */
-    keys(): IterableIterator<string>;
-    /**
-     * Extracts a section of a path and returns it as a new [[PathNotation]],
-     * without modifying the original path.
-    */
-    slicePath(beginKeyIndex: number, endKeyIndex?: number): PathNotation;
-    [Symbol.iterator](): IterableIterator<string>;
+    slice(begin?: number, end?: number): PathNotation;
+    splice(start?: number, deleteCount?: number, ...items: (string | number)[]): PathNotation;
+    toString(): string;
     /**
      * Yields key literals from dot-notated path.
+     * @note
+     * When string representing positive integer is in square bracket notation,
+     * the string is parsed into an integer.
+     * ```
+     * const pathKeys = Array.from(PathNotation.pathNotationToKeys("foo[2]"));
+     * console.log(pathKeys[1] === 2); // true
+     * ```
     */
-    static pathNotationToKeys(path: string): IterableIterator<string>;
+    static pathNotationToKeys(path: string): IterableIterator<string | number>;
     /**
-      Returns dot-notated path string.
-    */
-    static keysToPathNotation(keys: Iterable<string>): string;
+     * Returns dot-notated and square bracket notated path string.
+     * @note
+     * When key contains "." character or the key is a positive integer, the key
+     * is formatted in square bracket notation.
+     * ```
+     * // Key with "." character
+     * let pathStr = PathNotation.keysToPathNotation(['foo', 'bar.baz']);
+     * console.log(pathStr); // "foo[bar.baz]"
+     *
+     * // Key that is positive integer
+     * pathStr = PathNotation.keysToPathNotation(['foo', 2]);
+     * console.log(pathStr); // "foo[2]"
+     * ```
+     */
+    static keysToPathNotation(keys: Iterable<string | number>): string;
 }
-export {};
