@@ -1,6 +1,6 @@
 {
   "name": "path-notation",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A dot-notation based path string which yields key literals, allows for the inclusion of the \".\"character in keys and square bracket notation in path strings, promotes readability of path strings and provides other useful utilities for reasoning and working with objects paths.",
   "main": "build/PathNotation.js",
   "scripts": {
