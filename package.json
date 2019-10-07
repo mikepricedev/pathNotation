@@ -1,6 +1,6 @@
 {
   "name": "path-notation",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A dot-notation based path string which yields key literals, allows for the inclusion of the \".\"character in keys and square bracket notation in path strings, promotes readability of path strings and provides other useful utilities for reasoning and working with objects paths.",
   "main": "build/PathNotation.js",
   "scripts": {
@@ -19,6 +19,10 @@
   ],
   "author": "Michael Price <mikepricedev@gmail.com>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mikepricedev/pathNotation.git"
+  },
   "devDependencies": {
     "@types/chai": "^4.2.1",
     "@types/mocha": "^5.2.7",
