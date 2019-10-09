@@ -19,13 +19,98 @@ describe('PathNotation',()=>{
 
       });
 
-      it(`Escapes with double backslashes e.g. "bar\\\\.baz" is key "bar.baz".`,()=>{
+      it(`Escapes '.' char with double backslashes outside of square bracket
+          notation e.g. "bar\\\\.baz" is "bar.baz".`,()=>
+      {
 
         const pathStr = 'foo.bar\\.baz';
 
         const result = Array.from(PathNotation.pathNotationToKeys(pathStr));
 
         expect(result[1]).to.eq('bar.baz');
+
+      });
+
+      it(`Does NOT escape double backlashed '.' inside of square bracket
+          notation e.g. "[bar\\\\.baz]" is "bar\\.baz"`,()=>
+      {
+
+        const pathStr = 'foo[bar\\.baz]';
+
+        const result = Array.from(PathNotation.pathNotationToKeys(pathStr));
+
+        expect(result[1]).to.eq('bar\\.baz');
+
+      });
+
+      it(`Escapes '\\' char with double backslashes outside of square bracket
+          notation e.g. "bar\\\\\\\\baz" is "bar\\baz".`,()=>{
+
+        const pathStr = 'foo.bar\\\\baz';
+
+        const result = Array.from(PathNotation.pathNotationToKeys(pathStr));
+
+        expect(result[1]).to.eq('bar\\baz');
+
+      });
+
+      it(`Does NOT escape double backlashed '\\' inside of square bracket
+          notation e.g. "[bar\\\\\\\\baz]" is "bar\\\\baz"`,()=>
+      {
+
+        const pathStr = 'foo[bar\\\\baz]';
+
+        const result = Array.from(PathNotation.pathNotationToKeys(pathStr));
+
+        expect(result[1]).to.eq('bar\\\\baz');
+
+      });
+
+      it(`Escapes '[' char with double backslashes outside of square bracket
+          notation e.g. "bar\\\\[baz" is key "bar[baz".`,()=>
+      {
+
+        const pathStr = 'foo.bar\\[baz';
+
+        const result = Array.from(PathNotation.pathNotationToKeys(pathStr));
+
+        expect(result[1]).to.eq('bar[baz');
+
+      });
+
+      it(`Does NOT escape double backlashed '[' inside of square bracket
+          notation e.g. "[bar\\\\[baz]" is "bar\\[baz"`,()=>
+      {
+
+        const pathStr = 'foo[bar\\[baz]';
+
+        const result = Array.from(PathNotation.pathNotationToKeys(pathStr));
+
+        expect(result[1]).to.eq('bar\\[baz');
+
+      });
+
+      it(`Escapes ']' char with double backslashes inside of square bracket
+          notation e.g. "[bar\\\\]baz]" is key "bar]baz".`,()=>
+      {
+
+        const pathStr = 'foo[bar\\]baz]';
+
+        const result = Array.from(PathNotation.pathNotationToKeys(pathStr));
+
+        expect(result[1]).to.eq('bar]baz');
+
+      });
+
+      it(`Does NOT escape double backlashed ']' outside of square bracket
+          notation e.g. "bar\\\\]baz" is "bar\\]baz"`,()=>
+      {
+
+        const pathStr = 'foo.bar\\]baz.';
+
+        const result = Array.from(PathNotation.pathNotationToKeys(pathStr));
+
+        expect(result[1]).to.eq('bar\\]baz');
 
       });
 
@@ -87,13 +172,22 @@ describe('PathNotation',()=>{
 
       });
 
-      it(`Adds square bracket notation keys with "." chars`,()=>{
+      it(`Adds square bracket notation keys with "." chars.`,()=>{
 
         const pathKeys = ['foo','bar', 'baz.qux'];
 
         expect(PathNotation.keysToPathNotation(pathKeys))
           .to.eq('foo.bar[baz.qux]');
 
+
+      });
+
+      it(`Adds square bracket notation keys with "\\" chars.`,()=>{
+
+        const pathKeys = ['foo','bar', 'baz\\qux'];
+
+        expect(PathNotation.keysToPathNotation(pathKeys))
+          .to.eq('foo.bar[baz\\qux]');
 
       });
 
@@ -107,6 +201,24 @@ describe('PathNotation',()=>{
           .to.eq('foo.0[baz.qux][1]');
 
 
+      });
+
+      it(`Escapes ']' chars in keys that are square bracketed.`, ()=>{
+
+        const pathKeys1 = ['foo','0', 'baz.qux]quux', 1];
+       
+        expect(PathNotation.keysToPathNotation(pathKeys1))
+          .to.eq('foo.0[baz.qux\\]quux][1]');
+
+        expect(Array.from(PathNotation.pathNotationToKeys(
+          PathNotation.keysToPathNotation(pathKeys1))))
+            .to.deep.equal(pathKeys1);
+
+        const pathKeys2 = ['foo','0', 'baz\\qux]quux', 1];
+    
+        expect(PathNotation.keysToPathNotation(pathKeys2))
+          .to.eq('foo.0[baz\\qux\\]quux][1]');
+        
       });
 
     });

@@ -97,27 +97,77 @@ export default class PathNotation extends Array<string | number> {
    * const pathKeys = Array.from(PathNotation.pathNotationToKeys("foo[2]"));
    * console.log(pathKeys[1] === 2); // true
    * ```
+   * @note
+   * Characters ".", "\\", and, "[" are escaped with double backslashes outside
+   * of square bracket notation and the character "]" is escaped with double
+   * backslashes inside of square bracket notation.  In all other cases double
+   * backslashes are parsed as a single slash in the path. This allows for the 
+   * "\\" character in paths and to pass double backslash escaping to consumers
+   * of [[PathNotation]].
   */
   static *pathNotationToKeys(path:string):IterableIterator<string | number> {
     
     let key = '';
-    let escaped = false;
     let squareBracket = false;
 
-    for(const char of path) {
+    for(let i = 0, len = path.length; i < len; i++) {
       
+      const char = path[i];
+
       // Escape char
-      if(char === '\\' && !escaped){
+      if(char === '\\'){
 
-        escaped = true;
-      
-      // Char is escaped, add to key without further checks
-      } else if(escaped) {
+        const nextIndex = i + 1;
 
-        key += char;
-        escaped = false;
+        // Last char ignore
+        if(nextIndex === len) {
+        
+          key += char;
+          continue;
+        
+        }
+
+        const nextChar = path[nextIndex];
+
+        // The only escapable chars in square bracket notation is ']'
+        if(squareBracket) {
+
+          if(nextChar === ']') {
+            
+            // add nextChar and increment i so nextChar is skipped next loop
+            key += nextChar;
+            i++;
+          
+          } else {
+
+            key += char;
+
+          }
+
+          continue;
+
+        }
+
+        // The only escapable chars outside of square bracket notation are 
+        // '\', '.', and '[' 
+        switch(nextChar) {
+          
+          // add nextChar and increment i so nextChar is skipped next loop
+          case '.':
+          case '[':
+          case '\\':
+          
+            key += nextChar;
+            i++;
+            break;
+          
+          default:
+              key += char;
+
+        }
+
       
-      // Open square bracket, yield and reset key
+      // Open square bracket
       } else if(char === '[' && squareBracket === false) {
 
         squareBracket = true;
@@ -130,7 +180,7 @@ export default class PathNotation extends Array<string | number> {
         }
       
       // Close square bracket, yield and reset key
-      } else if(char === ']' && squareBracket) {  
+      } else if(char === ']' && squareBracket) {
 
         squareBracket = false;
         
@@ -172,16 +222,27 @@ export default class PathNotation extends Array<string | number> {
   /**
    * Returns dot-notated and square bracket notated path string.
    * @note
-   * When key contains "." character or the key is a positive integer, the key 
-   * is formatted in square bracket notation.
+   * When a key contains the "." character, the "\\" character, or the key is a 
+   * positive integer, the key is formatted in square bracket notation.
    * ```
    * // Key with "." character
    * let pathStr = PathNotation.keysToPathNotation(['foo', 'bar.baz']);
    * console.log(pathStr); // "foo[bar.baz]"
    * 
+   * // Key with "\" character
+   * pathStr = PathNotation.keysToPathNotation(['foo', 'bar\\baz']);
+   * console.log(pathStr); // "foo[bar\baz]"
+   * 
    * // Key that is positive integer
    * pathStr = PathNotation.keysToPathNotation(['foo', 2]);
    * console.log(pathStr); // "foo[2]"
+   * ```
+   * @note
+   * When a key is formatted with square bracket notation due to a "." or "\\" 
+   * character and it contains a "]" character.  The "]" is escaped.
+   * ```
+   * const pathStr = PathNotation.keysToPathNotation(['foo', 'bar.baz]qux']);
+   * console.log(pathStr); // "foo[bar.baz\]qux]"
    * ```
    */
   static keysToPathNotation(keys:Iterable<string | number>):string 
@@ -206,9 +267,16 @@ export default class PathNotation extends Array<string | number> {
       pathNotation = Number.isInteger(key) && key > -1 ? `[${key}]` 
         : key.toString();
 
+    } else if(key.indexOf('.') > -1 || key.indexOf('\\') > -1) {
+
+      // Escape closing square brackets that are apart of path
+      key = (<string>key).split(']').join('\\]');
+
+      pathNotation = `[${key}]`;
+
     } else {
 
-      pathNotation = key.indexOf('.') > -1 ? `[${key}]` : key;
+      pathNotation = key;
 
     }
         
@@ -229,7 +297,10 @@ export default class PathNotation extends Array<string | number> {
 
         }
 
-      } else if(key.indexOf('.') > -1){
+      } else if(key.indexOf('.') > -1 || key.indexOf('\\') > -1){
+
+        // Escape closing square brackets that are apart of path
+        key = (<string>key).split(']').join('\\]');
 
         pathNotation = `${pathNotation}[${key}]`;
         
