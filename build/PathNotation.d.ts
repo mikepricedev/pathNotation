@@ -27,21 +27,39 @@ export default class PathNotation extends Array<string | number> {
      * const pathKeys = Array.from(PathNotation.pathNotationToKeys("foo[2]"));
      * console.log(pathKeys[1] === 2); // true
      * ```
+     * @note
+     * Characters ".", "\\", and, "[" are escaped with double backslashes outside
+     * of square bracket notation and the character "]" is escaped with double
+     * backslashes inside of square bracket notation.  In all other cases double
+     * backslashes are parsed as a single slash in the path. This allows for the
+     * "\\" character in paths and to pass double backslash escaping to consumers
+     * of [[PathNotation]].
     */
     static pathNotationToKeys(path: string): IterableIterator<string | number>;
     /**
      * Returns dot-notated and square bracket notated path string.
      * @note
-     * When key contains "." character or the key is a positive integer, the key
-     * is formatted in square bracket notation.
+     * When a key contains the "." character, the "\\" character, or the key is a
+     * positive integer, the key is formatted in square bracket notation.
      * ```
      * // Key with "." character
      * let pathStr = PathNotation.keysToPathNotation(['foo', 'bar.baz']);
      * console.log(pathStr); // "foo[bar.baz]"
      *
+     * // Key with "\" character
+     * pathStr = PathNotation.keysToPathNotation(['foo', 'bar\\baz']);
+     * console.log(pathStr); // "foo[bar\baz]"
+     *
      * // Key that is positive integer
      * pathStr = PathNotation.keysToPathNotation(['foo', 2]);
      * console.log(pathStr); // "foo[2]"
+     * ```
+     * @note
+     * When a key is formatted with square bracket notation due to a "." or "\\"
+     * character and it contains a "]" character.  The "]" is escaped.
+     * ```
+     * const pathStr = PathNotation.keysToPathNotation(['foo', 'bar.baz]qux']);
+     * console.log(pathStr); // "foo[bar.baz\]qux]"
      * ```
      */
     static keysToPathNotation(keys: Iterable<string | number>): string;

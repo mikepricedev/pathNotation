@@ -2622,7 +2622,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/95ca908/src/PathNotation.ts#L9">PathNotation.ts:9</a></li>
+								<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/46fd39a/src/PathNotation.ts#L9">PathNotation.ts:9</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2673,7 +2673,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">__@to<wbr>String<wbr>Tag<span class="tsd-signature-symbol">:</span> </div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/95ca908/src/PathNotation.ts#L66">PathNotation.ts:66</a></li>
+						<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/46fd39a/src/PathNotation.ts#L66">PathNotation.ts:66</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2683,7 +2683,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">first<wbr>Key<span class="tsd-signature-symbol">:</span> </div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/95ca908/src/PathNotation.ts#L51">PathNotation.ts:51</a></li>
+						<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/46fd39a/src/PathNotation.ts#L51">PathNotation.ts:51</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2698,7 +2698,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">last<wbr>Key<span class="tsd-signature-symbol">:</span> </div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/95ca908/src/PathNotation.ts#L60">PathNotation.ts:60</a></li>
+						<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/46fd39a/src/PathNotation.ts#L60">PathNotation.ts:60</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -4480,7 +4480,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides Array.slice</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/95ca908/src/PathNotation.ts#L73">PathNotation.ts:73</a></li>
+								<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/46fd39a/src/PathNotation.ts#L73">PathNotation.ts:73</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4622,7 +4622,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides Array.splice</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/95ca908/src/PathNotation.ts#L79">PathNotation.ts:79</a></li>
+								<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/46fd39a/src/PathNotation.ts#L79">PathNotation.ts:79</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4675,7 +4675,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides Array.toString</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/95ca908/src/PathNotation.ts#L87">PathNotation.ts:87</a></li>
+								<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/46fd39a/src/PathNotation.ts#L87">PathNotation.ts:87</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -4747,7 +4747,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/95ca908/src/PathNotation.ts#L187">PathNotation.ts:187</a></li>
+								<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/46fd39a/src/PathNotation.ts#L248">PathNotation.ts:248</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4756,15 +4756,24 @@ img {
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>note</dt>
-								<dd><p>When key contains &quot;.&quot; character or the key is a positive integer, the key
-									is formatted in square bracket notation.</p>
+								<dd><p>When a key contains the &quot;.&quot; character, the &quot;\&quot; character, or the key is a
+									positive integer, the key is formatted in square bracket notation.</p>
 									<pre><code><span class="hljs-comment">// Key with "." character</span>
 <span class="hljs-keyword">let</span> pathStr = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">PathNotation</span>.</span></span>keys<span class="hljs-constructor">ToPathNotation(['<span class="hljs-params">foo</span>', '<span class="hljs-params">bar</span>.<span class="hljs-params">baz</span>'])</span>;
 console.log(pathStr); <span class="hljs-comment">// "foo[bar.baz]"</span>
 
+<span class="hljs-comment">// Key with "\" character</span>
+pathStr = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">PathNotation</span>.</span></span>keys<span class="hljs-constructor">ToPathNotation(['<span class="hljs-params">foo</span>', '<span class="hljs-params">bar</span>\\<span class="hljs-params">baz</span>'])</span>;
+console.log(pathStr); <span class="hljs-comment">// "foo[bar\baz]"</span>
+
 <span class="hljs-comment">// Key that is positive integer</span>
 pathStr = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">PathNotation</span>.</span></span>keys<span class="hljs-constructor">ToPathNotation(['<span class="hljs-params">foo</span>', 2])</span>;
 console.log(pathStr); <span class="hljs-comment">// "foo[2]"</span></code></pre></dd>
+								<dt>note</dt>
+								<dd><p>When a key is formatted with square bracket notation due to a &quot;.&quot; or &quot;\&quot;
+									character and it contains a &quot;]&quot; character.  The &quot;]&quot; is escaped.</p>
+									<pre><code>const pathStr = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">PathNotation</span>.</span></span>keys<span class="hljs-constructor">ToPathNotation(['<span class="hljs-params">foo</span>', '<span class="hljs-params">bar</span>.<span class="hljs-params">baz</span>]<span class="hljs-params">qux</span>'])</span>;
+console.log(pathStr); <span class="hljs-comment">// "foo[bar.baz\]qux]"</span></code></pre></dd>
 							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4787,7 +4796,7 @@ console.log(pathStr); <span class="hljs-comment">// "foo[2]"</span></code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/95ca908/src/PathNotation.ts#L101">PathNotation.ts:101</a></li>
+								<li>Defined in <a href="https://github.com/mikepricedev/pathNotation/blob/46fd39a/src/PathNotation.ts#L108">PathNotation.ts:108</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4800,6 +4809,14 @@ console.log(pathStr); <span class="hljs-comment">// "foo[2]"</span></code></pre>
 									the string is parsed into an integer.</p>
 									<pre><code>const pathKeys = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Array</span>.</span></span>from(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">PathNotation</span>.</span></span>path<span class="hljs-constructor">NotationToKeys(<span class="hljs-string">"foo[2]"</span>)</span>);
 console.log(pathKeys<span class="hljs-literal">[<span class="hljs-number">1</span>]</span><span class="hljs-operator"> === </span><span class="hljs-number">2</span>); <span class="hljs-comment">// true</span></code></pre></dd>
+								<dt>note</dt>
+								<dd><p>Characters &quot;.&quot;, &quot;\&quot;, and, &quot;[&quot; are escaped with double backslashes outside
+										of square bracket notation and the character &quot;]&quot; is escaped with double
+										backslashes inside of square bracket notation.  In all other cases double
+										backslashes are parsed as a single slash in the path. This allows for the
+										&quot;\&quot; character in paths and to pass double backslash escaping to consumers
+									of <a href="index.html">PathNotation</a>.</p>
+								</dd>
 							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
